@@ -8,6 +8,7 @@ const LogoutButton = () => {
             await axios.post('http://localhost:8080/logout', {}, {
                 withCredentials: true // 세션을 유지하기 위해 설정
             });
+            window.location.href = '/';
         } catch (error) {
             console.log('로그아웃 중 오류 발생', error);
         }

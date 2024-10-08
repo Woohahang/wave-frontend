@@ -1,21 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
+import useAuth from '../hooks/useAuth';
 
-const Header = () => {
+const HeaderTest = () => {
+    // 로그인 상태와 사용자 정보를 확인합니다.
+    const { isLoggedIn, userData } = useAuth();
+
     return (
-        <header>
-            <h1>Wave</h1>
+        <div>
             <nav>
-                <LoginButton />
-                <LogoutButton />
-                <Link to="/">홈</Link> {/* 홈 링크 */}
-                <Link to="/user">유저 페이지</Link> {/* 유저 페이지 링크 */}
-                <Link to="/test">테스트</Link> {/* 유저 페이지 링크 */}
-            </nav>
-        </header>
-    );
-};
+                {isLoggedIn ? (
+                    <>
+                        <p>안녕하세요, {userData.userName}님!</p>
+                        <LogoutButton />
+                    </>
+                ) : (
+                    <LoginButton />
+                )}
 
-export default Header;
+            </nav>
+        </div>
+    )
+}
+
+export default HeaderTest;
