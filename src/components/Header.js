@@ -8,9 +8,9 @@ const Header = () => {
     // 로그인 상태와 사용자 정보를 확인합니다.
     const { isLoggedIn, userData } = useAuth();
 
+    // Discord 로그인 페이지로 리디렉션
     const handleDiscordLogin = () => {
-        const discordOAuthUrl = 'http://localhost:8080/oauth2/authorization/discord'; // 서버의 Discord OAuth2 URL
-        window.location.href = discordOAuthUrl; // Discord 로그인 페이지로 리디렉션
+        window.location.href = 'http://localhost:8080/oauth2/authorization/discord';
     };
 
     const handleLogout = async () => {
@@ -26,20 +26,24 @@ const Header = () => {
         }
     };
 
+    // Bot 초대 링크로 리디렉션
     const handleAddToServer = () => {
-        const addToServerUrl = 'https://discord.com/oauth2/authorize?client_id=1227561479801409566&permissions=8&integration_type=0&scope=bot+applications.commands';
-        window.location.href = addToServerUrl; // 지정된 URL로 리디렉션
+        window.location.href = 'https://discord.com/oauth2/authorize?client_id=1227561479801409566&permissions=8&integration_type=0&scope=bot+applications.commands';
+    };
+
+    const handleLogoClick = () => {
+        window.location.href = '/'; // 새로고침하면서 홈으로 이동
     };
 
     return (
         <header className="header">
-            <div className="logo-container">
+            <div className="logo-container" onClick={handleLogoClick}>
                 <img src={logo} alt="Logo" className="logo" />
                 <span className="logo-text">Wave</span>
             </div>
 
             <div className="button-container">
-                <button className="add-button" onClick={handleAddToServer}>Add To Server</button>
+                <button className="add-button" onClick={handleAddToServer}>서버에 추가</button>
 
                 {isLoggedIn ? (
                     <>
@@ -47,7 +51,7 @@ const Header = () => {
                         <p className="username">{userData.userName}</p>
                         <img src={logoutIcon} alt="logoutIcon" className="logout-icon" onClick={handleLogout} />
                     </>
-                ) : <button className="discord-button" onClick={handleDiscordLogin}>Login with Discord</button>}
+                ) : <button className="discord-button" onClick={handleDiscordLogin}>디스코드로 로그인</button>}
             </div>
         </header>
     )
