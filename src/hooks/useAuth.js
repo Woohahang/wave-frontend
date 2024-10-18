@@ -17,7 +17,6 @@ const useAuth = () => {
                 const response = await axios.get('/api/user/status');
 
                 if (response.status === 200) {
-                    console.log("response : ", response);
                     setAuthData({
                         isLoggedIn: true, // 로그인 상태
                         userData: response.data // 사용자 정보
